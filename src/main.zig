@@ -1,4 +1,5 @@
 const std = @import("std");
+const words = @embedFile("./prompt.txt");
 
 const Token = struct { start: usize, len: u32 }; // spans into original string
 
@@ -6,6 +7,43 @@ const Key = struct {
     b0: u8,
     b1: u8,
     len: u8, // 1 or 2
+};
+
+const Model = struct {
+    name: []const u8,
+    price_per_million: f64,
+};
+
+const models = [_]Model{
+    // Cheapest models
+    .{ .name = "Amazon Nova Micro", .price_per_million = 0.035 },
+    .{ .name = "Gemini 1.5 Flash-8B", .price_per_million = 0.0375 },
+    .{ .name = "Ministral 3B", .price_per_million = 0.04 },
+
+    // Budget models
+    .{ .name = "GPT-4o Mini", .price_per_million = 0.15 },
+    .{ .name = "Claude 3 Haiku", .price_per_million = 0.25 },
+    .{ .name = "DeepSeek Chat", .price_per_million = 0.27 },
+
+    // Mid-range models
+    .{ .name = "Claude 3.5 Haiku", .price_per_million = 0.80 },
+    .{ .name = "o1-mini", .price_per_million = 1.10 },
+    .{ .name = "Gemini 1.5 Pro", .price_per_million = 1.25 },
+
+    // Premium models
+    .{ .name = "GPT-4o", .price_per_million = 2.50 },
+    .{ .name = "Claude 3.5 Sonnet", .price_per_million = 3.00 },
+    .{ .name = "Grok 3 Beta", .price_per_million = 3.00 },
+
+    // Enterprise models
+    .{ .name = "Claude 3 Opus", .price_per_million = 15.00 },
+    .{ .name = "Claude Opus 4", .price_per_million = 15.00 },
+    .{ .name = "o1", .price_per_million = 15.00 },
+
+    // Ultra-premium models
+    .{ .name = "o3 Pro", .price_per_million = 20.00 },
+    .{ .name = "GPT-4.5", .price_per_million = 75.00 },
+    .{ .name = "o1 Pro", .price_per_million = 150.00 },
 };
 
 fn keyFromSlice(s: []const u8) Key {
@@ -21,12 +59,12 @@ pub fn main() !void {
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
-    const words = "Hello mfking world! world!";
-
     const tokens = try bpeTokenizeAll(words, allocator);
     defer allocator.free(tokens);
 
     try printColoredTokens(words, tokens, allocator);
+
+    try printPricingTable(tokens.len);
 }
 
 fn bpeTokenizeAll(s: []const u8, allocator: std.mem.Allocator) ![]Token {
@@ -133,5 +171,42 @@ fn printColoredTokens(
     }
     std.debug.print("\n", .{});
 
-    std.debug.print("Total Tokens: {d}\n", .{tokens.len});
+    std.debug.print("Total Tokens: {d}\n\n", .{tokens.len});
+}
+
+fn printPricingTable(token_count: usize) !void {
+    std.debug.print("╔══════════════════════════════╤═══════════════════╤══════════════════════╗\n", .{});
+    std.debug.print("║ Model                        │ Prompt Cost       │ Price per Million    ║\n", .{});
+    std.debug.print("╠══════════════════════════════╪═══════════════════╪══════════════════════╣\n", .{});
+
+    for (models) |model| {
+        const cost = calculateCost(token_count, model.price_per_million);
+
+        // Format cost with appropriate precision
+        if (cost < 0.000001) {
+            std.debug.print("║ {s:<28} │ ${d:>16.10} │ ${d:>19.2} ║\n", .{
+                model.name,
+                cost,
+                model.price_per_million,
+            });
+        } else if (cost < 0.01) {
+            std.debug.print("║ {s:<28} │ ${d:>16.8} │ ${d:>19.2} ║\n", .{
+                model.name,
+                cost,
+                model.price_per_million,
+            });
+        } else {
+            std.debug.print("║ {s:<28} │ ${d:>16.6} │ ${d:>19.2} ║\n", .{
+                model.name,
+                cost,
+                model.price_per_million,
+            });
+        }
+    }
+
+    std.debug.print("╚══════════════════════════════╧═══════════════════╧══════════════════════╝\n", .{});
+}
+
+fn calculateCost(token_count: usize, price_per_million: f64) f64 {
+    return (@as(f64, @floatFromInt(token_count)) / 1_000_000.0) * price_per_million;
 }
