@@ -15,7 +15,6 @@ It reads input from `src/prompt.txt`, performs BPE tokenization, and displays a 
   - ANSI-colored output for token visualization
 - **LLM Pricing Calculator**:
   - Calculates prompt costs
-  - Models grouped by price tier (budget to ultra-premium)
   - Displays cost per prompt and price per million tokens
 - Reads input from `src/prompt.txt` file
 
@@ -37,6 +36,7 @@ zig build run
 
 Output:
 
+<img width="2468" height="1770" alt="CleanShot 2025-08-30 at 20 24 52@2x" src="https://github.com/user-attachments/assets/f8e7b8c9-8fc7-49fc-85c3-3c818495a4db" />
 
 ## ⚡ Usage
 
@@ -56,17 +56,6 @@ const models = [_]Model{
     // ... other models
 };
 ```
-
----
-
-## 📋 Supported Models
-
-The tokenizer includes pricing for:
-- **Budget**: Amazon Nova, Gemini Flash, GPT-4o Mini, Claude Haiku
-- **Mid-range**: Claude 3.5 Haiku, o1-mini, Gemini Pro
-- **Premium**: GPT-4o, Claude 3.5 Sonnet, Grok 3
-- **Enterprise**: Claude Opus, o1
-- **Ultra-premium**: o3 Pro, GPT-4.5, o1 Pro
 
 ---
 
