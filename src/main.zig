@@ -16,28 +16,24 @@ const Model = struct {
 
 const models = [_]Model{
     // Cheapest models
-    .{ .name = "Amazon Nova Micro", .price_per_million = 0.035 },
-    .{ .name = "Gemini 1.5 Flash-8B", .price_per_million = 0.0375 },
-    .{ .name = "Ministral 3B", .price_per_million = 0.04 },
+    .{ .name = "GPT-5", .price_per_million = 0.0625 },
 
     // Budget models
+    .{ .name = "Gemini 2.5 Pro", .price_per_million = 0.125 },
     .{ .name = "GPT-4o Mini", .price_per_million = 0.15 },
-    .{ .name = "Claude 3 Haiku", .price_per_million = 0.25 },
-    .{ .name = "DeepSeek Chat", .price_per_million = 0.27 },
 
     // Mid-range models
-    .{ .name = "Claude 3.5 Haiku", .price_per_million = 0.80 },
     .{ .name = "o1-mini", .price_per_million = 1.10 },
     .{ .name = "Gemini 1.5 Pro", .price_per_million = 1.25 },
 
     // Premium models
     .{ .name = "GPT-4o", .price_per_million = 2.50 },
     .{ .name = "Claude 3.5 Sonnet", .price_per_million = 3.00 },
-    .{ .name = "Grok 3 Beta", .price_per_million = 3.00 },
+    .{ .name = "Grok 4", .price_per_million = 3.00 },
 
     // Enterprise models
-    .{ .name = "Claude 3 Opus", .price_per_million = 15.00 },
     .{ .name = "Claude Opus 4", .price_per_million = 15.00 },
+    .{ .name = "Claude Opus 4.1", .price_per_million = 15.00 },
     .{ .name = "o1", .price_per_million = 15.00 },
 
     // Ultra-premium models
