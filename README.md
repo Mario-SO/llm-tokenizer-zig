@@ -1,6 +1,7 @@
 # 🧩 LLM Tokenizer with Pricing Calculator in Zig
 
-This project is a **Byte Pair Encoding (BPE) tokenizer** written in [Zig](https://ziglang.org) that tokenizes text and calculates the cost across various LLM providers.  
+This project is a **Byte Pair Encoding (BPE) tokenizer** written in [Zig](https://ziglang.org) that tokenizes text and calculates the cost across various LLM providers.
+
 It reads input from `src/prompt.txt`, performs BPE tokenization, and displays a comprehensive pricing table for popular language models.
 
 ---
@@ -13,7 +14,7 @@ It reads input from `src/prompt.txt`, performs BPE tokenization, and displays a 
   - Stops when no pair occurs more than once
   - ANSI-colored output for token visualization
 - **LLM Pricing Calculator**:
-  - Calculates prompt costs for 18+ popular models
+  - Calculates prompt costs
   - Models grouped by price tier (budget to ultra-premium)
   - Displays cost per prompt and price per million tokens
 - Reads input from `src/prompt.txt` file
@@ -35,33 +36,15 @@ zig build run
 ```
 
 Output:
-- Colorized tokens (ANSI colors)
-- Total token count
-- Pricing table showing costs across different LLM providers
 
-Example pricing table output:
-```
-Total Tokens: 20
-
-╔══════════════════════════════╤═══════════════════╤══════════════════════╗
-║ Model                        │ Prompt Cost       │ Price per Million    ║
-╠══════════════════════════════╪═══════════════════╪══════════════════════╣
-║ Amazon Nova Micro            │ $    0.0000007000 │ $               0.04 ║
-║ GPT-4o Mini                  │ $      0.00000300 │ $               0.15 ║
-║ Claude 3.5 Sonnet            │ $      0.00006000 │ $               3.00 ║
-║ o1 Pro                       │ $      0.00300000 │ $             150.00 ║
-╚══════════════════════════════╧═══════════════════╧══════════════════════╝
-```
-
----
 
 ## ⚡ Usage
 
 1. **Add your text** to `src/prompt.txt`
 2. **Build and run**:
-   ```bash
-   zig build run
-   ```
+ ```bash
+ zig build run
+ ```
 
 ### Adding New Models
 
@@ -90,7 +73,5 @@ The tokenizer includes pricing for:
 ## 🚀 Next Steps
 
 * [x] Allow reading text from a file instead of hardcoding
-* [ ] Support for different tokenization algorithms
-* [ ] Export results to JSON/CSV
 * [ ] Command-line arguments for file input
 
