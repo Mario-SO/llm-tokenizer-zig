@@ -1,9 +1,1 @@
-Perfect! The program now:
-  1. Tokenizes the string using BPE
-  2. Displays the colorized tokens
-  3. Shows the total token count
-  4. Prints a formatted table with model names, calculated prompt costs, and price per million tokens
-
-  The code is structured to make it easy to add new models - just add them to the models array with their name
-  and price per million tokens. The table automatically calculates the cost based on the token count and
-  formats it appropriately.
+This sentence must be tokenized: aabababcbabcaababcbabcabcaajabcabcgcbagcaca
