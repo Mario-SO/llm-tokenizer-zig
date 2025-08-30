@@ -9,33 +9,19 @@ const ColorCode = struct {
 
 const COLORS = [_]ColorCode{
     // Regular colors
-    .{ .code = "31" },     // Red
-    .{ .code = "32" },     // Green
-    .{ .code = "33" },     // Yellow
-    .{ .code = "34" },     // Blue
-    .{ .code = "35" },     // Magenta
-    .{ .code = "36" },     // Cyan
+    .{ .code = "31" }, // Red
+    .{ .code = "32" }, // Green
+    .{ .code = "33" }, // Yellow
+    .{ .code = "34" }, // Blue
+    .{ .code = "35" }, // Magenta
+    .{ .code = "36" }, // Cyan
     // Bright colors
-    .{ .code = "91" },     // Bright Red
-    .{ .code = "92" },     // Bright Green
-    .{ .code = "93" },     // Bright Yellow
-    .{ .code = "94" },     // Bright Blue
-    .{ .code = "95" },     // Bright Magenta
-    .{ .code = "96" },     // Bright Cyan
-    // Bold + regular colors for variation
-    .{ .code = "1;31" },   // Bold Red
-    .{ .code = "1;32" },   // Bold Green
-    .{ .code = "1;33" },   // Bold Yellow
-    .{ .code = "1;34" },   // Bold Blue
-    .{ .code = "1;35" },   // Bold Magenta
-    .{ .code = "1;36" },   // Bold Cyan
-    // Bold + bright colors
-    .{ .code = "1;91" },   // Bold Bright Red
-    .{ .code = "1;92" },   // Bold Bright Green
-    .{ .code = "1;93" },   // Bold Bright Yellow
-    .{ .code = "1;94" },   // Bold Bright Blue
-    .{ .code = "1;95" },   // Bold Bright Magenta
-    .{ .code = "1;96" },   // Bold Bright Cyan
+    .{ .code = "91" }, // Bright Red
+    .{ .code = "92" }, // Bright Green
+    .{ .code = "93" }, // Bright Yellow
+    .{ .code = "94" }, // Bright Blue
+    .{ .code = "95" }, // Bright Magenta
+    .{ .code = "96" }, // Bright Cyan
 };
 
 const Key = struct {
@@ -81,10 +67,10 @@ pub fn printPricingTable(token_count: usize) void {
     std.debug.print("╔══════════════════════════════╤═══════════════════╤══════════════════════╗\n", .{});
     std.debug.print("║ Model                        │ Prompt Cost       │ Price per Million    ║\n", .{});
     std.debug.print("╠══════════════════════════════╪═══════════════════╪══════════════════════╣\n", .{});
-    
+
     for (pricing_module.models) |model| {
         const cost = pricing_module.calculateCost(token_count, model.price_per_million);
-        
+
         if (cost < 0.000001) {
             std.debug.print("║ {s:<28} │ ${d:>16.10} │ ${d:>19.2} ║\n", .{
                 model.name,
@@ -105,6 +91,6 @@ pub fn printPricingTable(token_count: usize) void {
             });
         }
     }
-    
+
     std.debug.print("╚══════════════════════════════╧═══════════════════╧══════════════════════╝\n", .{});
 }
