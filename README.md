@@ -25,7 +25,7 @@ It reads input from `src/prompt.txt`, performs BPE tokenization, and displays a 
 Create a file `src/prompt.txt` with your text:
 
 ```
-Hello world! This is a test prompt.
+This sentence must be tokenized.
 ```
 
 Run:
