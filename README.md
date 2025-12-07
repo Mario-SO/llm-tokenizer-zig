@@ -38,14 +38,6 @@ Output:
 
 <img width="2468" height="1770" alt="CleanShot 2025-08-30 at 20 24 52@2x" src="https://github.com/user-attachments/assets/f8e7b8c9-8fc7-49fc-85c3-3c818495a4db" />
 
-## ⚡ Usage
-
-1. **Add your text** to `src/prompt.txt`
-2. **Build and run**:
- ```bash
- zig build run
- ```
-
 ### Adding New Models
 
 To add new LLM models, edit the `models` array in `src/main.zig`:
